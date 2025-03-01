@@ -9,7 +9,8 @@
             <Label FontSize="22" FontAttributes="Bold" Text="Notes" VerticalOptions="End"/>
             <Label FontSize="22" Text="v1.0" VerticalOptions="End"/>
         </HorizontalStackLayout>
-        
-        <Label Text="This app is written in XAML and C# with .NET MAUI."
+
+        <Label Text="This app is written in XAML and C# with .NET MAUI."/>
+        <Button Text="Learn more..." Clicked="onLearnMoreClicked"/> 
     </VerticalStackLayout>
 </ContentPage>
