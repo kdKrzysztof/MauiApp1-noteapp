@@ -1,3 +1,5 @@
+using MauiApp1_noteapp.Models;
+
 namespace MauiApp1_noteapp.Views;
 
 public partial class About : ContentPage
@@ -8,6 +10,7 @@ public partial class About : ContentPage
     }
     private async void onLearnMoreClicked(object sender, EventArgs e)
     {
-        await Browser.OpenAsync("https://aka.ms/maui");
+        if(BindingContext is AboutModel about)
+            await Browser.OpenAsync(about.RedirectUrl);
     }
 }
