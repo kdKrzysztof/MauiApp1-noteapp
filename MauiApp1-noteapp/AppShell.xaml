@@ -8,8 +8,8 @@
     Title="MauiApp1_noteapp">
     <ShellContent
         Title="Notes"
-        ContentTemplate="{DataTemplate local:NotePage}"
+        ContentTemplate="{DataTemplate local:NotePage}"/>
     <ShellContent
         Title="About"
-        ContentTemplate="{DataTemplate local:About}"
+        ContentTemplate="{DataTemplate local:About}"/>
 </Shell>
