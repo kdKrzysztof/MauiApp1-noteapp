@@ -65,13 +65,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\About.xaml.cs">
-	    <DependentUpon>About.xaml</DependentUpon>
+	  <Compile Update="Views\AboutPage.xaml.cs">
+	    <DependentUpon>AboutPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\AllNotesViewPage.xaml.cs">
+	    <DependentUpon>AllNotesViewPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\About.xaml">
+	  <MauiXaml Update="Views\AboutPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AllNotesViewPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\NotePage.xaml">

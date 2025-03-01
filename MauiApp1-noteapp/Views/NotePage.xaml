@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MauiApp1_noteapp.Models"
              x:Class="MauiApp1_noteapp.Views.NotePage"
+             x:DataType="models:NoteModel"
              Title="Note">
     <VerticalStackLayout>
         <Editor x:Name="TextEditor"
                 Placeholder="Enter your note"
+                Text="{Binding Text}"
                 HeightRequest="100"/>
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
-            <Button Text="Save" Clicked="onSaveButtonClicked"/>
-            <Button Grid.Column="1" Text="Delete" Clicked="onDeleteButtonClicked"/>
+            <Button Text="Save" Clicked="OnSaveButtonClicked"/>
+            <Button Grid.Column="1" Text="Delete" Clicked="OnDeleteButtonClicked"/>
         </Grid>
-        <Label Text="Your note:"/>
-        <Label x:Name="viewNoteContent" Text=""/>
     </VerticalStackLayout>
 </ContentPage>

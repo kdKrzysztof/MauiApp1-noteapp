@@ -1,41 +1,51 @@
+using System.Threading.Tasks;
+
 namespace MauiApp1_noteapp.Views;
 
+[QueryProperty(nameof(ItemId), nameof(ItemId))]
 public partial class NotePage : ContentPage
 {
-	string _fileName = Path.Combine(FileSystem.AppDataDirectory, "notes.txt");
-
-	public NotePage()
+    public string ItemId { set { LoadNote(value); } }
+    public NotePage()
 	{
 		InitializeComponent();
 
-		if (File.Exists(_fileName))
-			TextEditor.Text = File.ReadAllText(_fileName);
+		string appDataPath = FileSystem.AppDataDirectory;
+		string randomFileName = $"{Path.GetRandomFileName}.notes.txt";
 
-		viewNote();
+		LoadNote(Path.Combine(appDataPath, randomFileName));
     }
 
-	private void onSaveButtonClicked(object Sender, EventArgs e)
+	private async void OnSaveButtonClicked(object Sender, EventArgs e)
 	{
-		File.WriteAllText(_fileName, TextEditor.Text);
-		viewNote();
+		if (BindingContext is Models.NoteModel noteModel)
+			File.WriteAllText(noteModel.Filename, noteModel.Text);
 
+		await Shell.Current.GoToAsync("..");
     }
 
-	private void onDeleteButtonClicked(object Sender, EventArgs e)
+	private async void OnDeleteButtonClicked(object Sender, EventArgs e)
 	{
-		if (File.Exists(_fileName))
-            File.Delete(_fileName);
+		if (BindingContext is Models.NoteModel noteModel)
+		{
+			if(File.Exists(noteModel.Filename))
+				File.Delete(noteModel.Filename);
+		}
 
-		TextEditor.Text = "";
-		viewNote();
-
+		await Shell.Current.GoToAsync("..");
     }
 
-	private void viewNote()
+	private void LoadNote(string fileName)
 	{
-		if (File.Exists(_fileName))
-			viewNoteContent.Text = File.ReadAllText(_fileName);
-		else
-			viewNoteContent.Text = "";
+        Models.NoteModel noteModel = new Models.NoteModel();
+        noteModel.Filename = fileName;
+
+		if (File.Exists(fileName))
+		{
+			noteModel.Date = File.GetCreationTime(fileName);
+			noteModel.Text = File.ReadAllText(fileName);
+		}
+
+		BindingContext = noteModel;
     }
 }
