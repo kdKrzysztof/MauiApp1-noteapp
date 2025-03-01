@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-
 namespace MauiApp1_noteapp.Views;
 
 [QueryProperty(nameof(ItemId), nameof(ItemId))]
@@ -8,12 +6,21 @@ public partial class NotePage : ContentPage
     public string ItemId { set { LoadNote(value); } }
     public NotePage()
 	{
+		string randomFileName;
 		InitializeComponent();
 
-		string appDataPath = FileSystem.AppDataDirectory;
-		string randomFileName = $"{Path.GetRandomFileName}.notes.txt";
+        string appDataPath = FileSystem.AppDataDirectory;
+        randomFileName = $"{Path.GetRandomFileName()}.notes.txt";
 
-		LoadNote(Path.Combine(appDataPath, randomFileName));
+        LoadNote(Path.Combine(appDataPath, randomFileName));
+    }
+
+	public void RandomFileName()
+	{
+        string appDataPath = FileSystem.AppDataDirectory;
+        string randomFileName = $"{Path.GetRandomFileName()}.notes.txt";
+
+        LoadNote(Path.Combine(appDataPath, randomFileName));
     }
 
 	private async void OnSaveButtonClicked(object Sender, EventArgs e)
@@ -37,7 +44,7 @@ public partial class NotePage : ContentPage
 
 	private void LoadNote(string fileName)
 	{
-        Models.NoteModel noteModel = new Models.NoteModel();
+        var noteModel = new Models.NoteModel();
         noteModel.Filename = fileName;
 
 		if (File.Exists(fileName))

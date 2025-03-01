@@ -4,14 +4,15 @@
              xmlns:models="clr-namespace:MauiApp1_noteapp.Models"
              x:Class="MauiApp1_noteapp.Views.AllNotesView"
              x:DataType="models:AllNotesModel"
-             Title="AllNotesView">
+             Title="Notes:">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="onAddClicked" IconImageSource="{FontImage Glyph='+', Color=Black, Size=22}"/>
     </ContentPage.ToolbarItems>
 
     <CollectionView x:Name="notesCollection" 
                     ItemsSource="{Binding NotesCC}" 
-                    Margin="20" 
+                    Margin="20"
+                    SelectionMode="Single"
                     SelectionChanged="OnNotesCollectionSelectionChanged">
         <CollectionView.ItemsLayout>
             <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
